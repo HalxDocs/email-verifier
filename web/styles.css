@@ -1,0 +1,164 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #ffffff;
+  color: #000000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
+}
+
+/* ------------------------------
+   Card Container
+-------------------------------- */
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* ------------------------------
+   Typography
+-------------------------------- */
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin-top: 6px;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+  color: #444444;
+  line-height: 1.4;
+}
+
+/* ------------------------------
+   Input
+-------------------------------- */
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  outline: none;
+  font-size: 1rem;
+}
+
+input::placeholder {
+  color: #777777;
+}
+
+input:focus {
+  border-width: 2px;
+}
+
+/* ------------------------------
+   Button
+-------------------------------- */
+button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  background: #000000;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ------------------------------
+   Result Box
+-------------------------------- */
+.result {
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.85rem;
+}
+
+.result div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  word-break: break-word;
+}
+
+.result span:first-child {
+  color: #444444;
+}
+
+/* ------------------------------
+   Status & Note
+-------------------------------- */
+.result strong {
+  font-weight: 700;
+}
+
+.note {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #555555;
+  line-height: 1.4;
+}
+
+/* ------------------------------
+   Error
+-------------------------------- */
+.error {
+  color: #000000;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ------------------------------
+   Utility
+-------------------------------- */
+.hidden {
+  display: none;
+}
+
+/* ------------------------------
+   Mobile tweaks
+-------------------------------- */
+@media (max-width: 360px) {
+  .card {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.35rem;
+  }
+
+  .result {
+    font-size: 0.8rem;
+  }
+}

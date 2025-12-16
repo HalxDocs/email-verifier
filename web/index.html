@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Verifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="card">
+    <h1>Email Verifier</h1>
+    <p class="subtitle">
+      Check email syntax, domain, MX records, and SMTP reachability.
+    </p>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="example@gmail.com"
+      autocomplete="off"
+    />
+
+    <button id="verifyBtn">Verify Email</button>
+
+    <div id="result" class="result hidden"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("verifyBtn");
+    const resultBox = document.getElementById("result");
+
+    btn.addEventListener("click", verifyEmail);
+
+    async function verifyEmail() {
+      const email = document.getElementById("email").value.trim();
+
+      resultBox.classList.add("hidden");
+      resultBox.innerHTML = "";
+
+      if (!email) {
+        showError("bruhh your not a kid input an email address.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Calm am checking...";
+
+      try {
+        const res = await fetch("/verify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        resultBox.innerHTML = `
+          <div><span>Email</span><span>${data.email}</span></div>
+          <div><span>Status</span><span><strong>${data.status}</strong></span></div>
+          <div><span>Syntax</span><span>${bool(data.syntax)}</span></div>
+          <div><span>Domain</span><span>${bool(data.domain)}</span></div>
+          <div><span>MX Records</span><span>${bool(data.mx)}</span></div>
+          <div><span>SMTP</span><span>${data.smtp}</span></div>
+          <div class="note">
+            SMTP checks verify mail server reachability, not inbox existence.
+          </div>
+        `;
+
+        resultBox.classList.remove("hidden");
+      } catch {
+        showError("Failed to verify email.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Verify Email";
+      }
+    }
+
+    function bool(value) {
+      return value ? "✔ Yes" : "✖ No";
+    }
+
+    function showError(message) {
+      resultBox.innerHTML = `<div class="error">${message}</div>`;
+      resultBox.classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
