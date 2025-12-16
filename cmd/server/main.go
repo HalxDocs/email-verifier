@@ -39,8 +39,9 @@ func main() {
 	// --------------------------------------------------
 	// Serve UI (Plain HTML & CSS)
 	// --------------------------------------------------
-	r.StaticFile("/", "./web/index.html")
-	r.Static("/styles.css", "./web/styles.css")
+r.Static("/static", "./web")
+r.StaticFile("/", "./web/index.html")
+
 
 	// --------------------------------------------------
 	// API Routes
